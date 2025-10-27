@@ -58,7 +58,7 @@ h1 {
   margin: 60px 0 48px 0;
   font-size: 58px;
   font-weight: 800;
-  line-height: 80px;
+  line-height: normal;
   letter-spacing: 0.2px;
   text-align: left;
   color: #121212;
@@ -150,5 +150,18 @@ p {
 
   h2 {
     font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 0 30px;
+  }
+  nav ul {
+    gap: 35px;
+    padding: 0 30px;
+  }
+  h1 {
+    font-size: 35px;
   }
 }

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О городе</title>
+    <title>MeowFacts</title>
+    <script src="src/index.js" defer></script>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/index.css">
 </head>
 <body>
 <header>
@@ -16,6 +18,13 @@
         </ul>
     </nav>
 </header>
-
+<main>
+    <h1 style="text-align: center; margin-top: 0; ">Random facts about cats</h1>
+    <div>
+        <input type="number" id="numberInput" placeholder="Enter tne number of facts">
+        <br>
+        <button id="submitButton">Generate</button>
+    </div>
+</main>
 </body>
 </html>
