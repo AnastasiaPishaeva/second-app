@@ -152,13 +152,3 @@ p {
     font-size: 32px;
   }
 }
-
-@media (max-width: 600px) {
-  main {
-    padding: 0 30px;
-  }
-  nav ul {
-    gap: 35px;
-    padding: 0 30px;
-  }
-}
