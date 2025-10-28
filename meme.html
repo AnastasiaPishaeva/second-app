@@ -5,17 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мемы</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/meme.css">
+    <script src="src/meme.js" defer></script>
 </head>
 <body>
 <header>
     <nav>
         <ul>
             <li><a href="index.html">first</a></li>
-            <li><a href="meme_page.html" class="active">Мемы</a></li>
+            <li><a href="meme.html" class="active">Мемы</a></li>
             <li><a href="third.html">third</a></li>
         </ul>
     </nav>
 </header>
+<main>
+    <section>
+        <h1>Создание мемов</h1>
+        <div class="search-row">
+            <div class="search-input">
+                <input type="text" id="searchInput" placeholder="Поиск..." />
+            </div>
+            <div class="create-button">Создать мем</div>
+        </div>
+    </section>
 
+    <section class="memes-section">
+        <div class="memes-grid" id="memesGrid"></div>
+    </section>
+
+    <div id="memeModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Введите текст для мема</h3>
+            <form id="memeForm">
+                <input type="text" id="text0" placeholder="Верхний текст" required />
+                <input type="text" id="text1" placeholder="Нижний текст" required />
+                <button type="submit">Создать мем</button>
+            </form>
+            <div id="createdMeme"></div>
+        </div>
+    </div>
+</main>
 </body>
 </html>
