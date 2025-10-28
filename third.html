@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О городе</title>
+    <title>Book Library</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/books.css">
 </head>
 <body>
 <header>
@@ -17,5 +18,38 @@
     </nav>
 </header>
 
+<main>
+    <h1>Твоя Библиотека</h1>
+    <h2>Откройте для себя удивительные книги</h2>
+    
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск книг, авторов, жанров...">
+        </div>
+    </div>
+
+    <div class="books-display">
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Загружаем книги...</p>
+        </div>
+        
+        <div class="books-gallery" id="booksGallery" style="display: none;">
+            <h3 id="categoryTitle"></h3>
+            <div class="books-grid" id="booksGrid">
+                <!-- Книги будут добавлены здесь -->
+            </div>
+            <button class="load-more-btn" id="loadMoreBtn">Загрузить еще</button>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>Powered by <a href="https://openlibrary.org/" target="_blank" style="color: #FFFFFF;">Open Library</a></p>
+    </div>
+</footer>
+
+<script src="src/js/books.js"></script>
 </body>
 </html>
