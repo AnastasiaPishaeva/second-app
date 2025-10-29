@@ -75,10 +75,17 @@ function showFacts(facts) {
         return;
     }
 
-    facts.forEach(fact => {
+    facts.forEach((fact, index) => {
         const div = document.createElement('div');
         div.className = 'fact';
-        div.textContent = fact;
+        const pNumber = document.createElement('p');
+        pNumber.className = 'factNumber';
+        pNumber.textContent = `Fact №${index + 1}`;
+        const pText = document.createElement('p');
+        pText.className = "factText";
+        pText.textContent = fact;
+        div.appendChild(pNumber);
+        div.appendChild(pText);
         factsContainer.appendChild(div);
     });
 }

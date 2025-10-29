@@ -2,7 +2,6 @@ input {
     width: 200px;
     padding: 10px;
     font-size: 16px;
-    margin-bottom: 15px;
     border: 2px solid#CDC6B3;
     border-radius: 5px;
     transition: border-color 0.3s;
@@ -18,7 +17,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input:focus {
-    border-color:black;
+    border-color:#121212;
     outline: none;
 }
 
@@ -27,7 +26,7 @@ button {
     font-size: 16px;
     font-weight: bold;
     background: linear-gradient(to bottom, #ececdf, #CDC6B3);
-    color: black;
+    color: #121212;
     border: none;
     border-radius: 7px;
     cursor: pointer;
@@ -48,7 +47,6 @@ button:hover {
     box-shadow: 
         0 3px 0 #868177,
         0 4px 6px rgba(0,0,0,0.2);
-    top: 1px;
 }
 
 button:active {
@@ -99,4 +97,38 @@ button{
 input{
     width: 80%;
 }
+.factNumber, .factText  {
+    font-size: 14px;
 }
+}
+
+.factsContainer {
+    padding: 40px 0;
+}
+
+.fact{
+    background-color: #F6F6F3;
+    padding: 20px 40px;
+    border-radius: 5px;
+    margin-bottom: 26px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.fact:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.factNumber, .factText  {
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.Message{
+    font-size: 12px;
+    color: #e47359;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
