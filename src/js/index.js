@@ -1,65 +1,94 @@
 // Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
-    // Получаем элементы
-    const numberInput = document.getElementById('numberInput');
-    const submitButton = document.getElementById('submitButton');
-    
-    // Устанавливаем минимальное значение (не позволяет вводить отрицательные числа и 0 через UI)
-    numberInput.min = "1";
-    numberInput.step = "1";
-    
-    // Обработчик клика по кнопке
-    submitButton.addEventListener('click', function() {
-        getNumber();
-    });
-    
-    // Обработчик нажатия Enter в поле ввода
-    numberInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            getNumber();
-        }
-    });
-    
-    // Обработчик ввода - предотвращаем ввод отрицательных чисел и 0
-    numberInput.addEventListener('input', function(event) {
-        validateInput(event.target);
-    });
+const numberInput = document.getElementById('numberInput');
+const submitButton = document.getElementById('submitButton');
+
+numberInput.min = "1";
+numberInput.step = "1";
+
+submitButton.addEventListener('click', generateFacts);
+
+numberInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        generateFacts();
+    }
+});
+
+numberInput.addEventListener('input', function(event) {
+    validateInput(event.target);
+});
 });
 
 function validateInput(input) {
-    const value = parseFloat(input.value);
+    const value = input.value.trim();
+  
+    if (value === '') return;
+  
+    const number = Number(value);
+  
+    if (!Number.isInteger(number) || number <= 0) {
+      input.value = '';
+      document.getElementById('message').textContent = 'Вводите только целое положительное число!';
+    }
+  }
+
+function getNumber() {
+    const inputElement = document.getElementById('numberInput');
+    const number = inputElement.value;
+    const message = document.getElementById('message');
     
-    // Если значение меньше или равно 0, очищаем поле
-    if (value <= 0) {
-        input.value = '';
+    if (number === '') {
+        message.textContent = 'Нужно ввести число!';
+        return null;
+    }
+    
+    const numericValue = parseInt(number);
+    
+    if (isNaN(numericValue)) {
+        message.textContent = 'Введите корректное число!';
+        return null;
+    }
+    message.textContent = '';
+    return numericValue;
+}
+
+async function fetchCatFacts(count) {
+    try {
+        const response = await fetch(`https://meowfacts.herokuapp.com/?count=${count}`);
+        if (!response.ok) {
+            throw new Error('Ошибка сети');
+        }
+        const data = await response.json();
+        return data.data; 
+    } catch (error) {
+        console.error(error);
+        return null;
     }
 }
 
-function getNumber() {
-    // Получаем значение из поля ввода
-    const inputElement = document.getElementById('numberInput');
-    const number = inputElement.value;
-    const answer = inputElement.placeholder;
-    
-    // Проверяем, что поле не пустое
-    if (number === '') {
-        answer('Пожалуйста, введите число!', 'error');
-        return null;
+function showFacts(facts) {
+    const factsContainer = document.getElementById('facts');
+    factsContainer.innerHTML = ''; 
+
+    if (!facts || facts.length === 0) {
+        factsContainer.textContent = 'Факты не найдены';
+        return;
     }
-    
-    // Преобразуем в число
-    const numericValue = parseFloat(number);
-    
-    // Проверяем, что это валидное число
-    if (isNaN(numericValue)) {
-        answer('Пожалуйста, введите корректное число!', 'error');
-        return null;
-    }
-    
-    // Проверяем, что число положительное и не равно 0
-    if (numericValue <= 0) {
-        answer('Число должно быть положительным и больше 0!', 'error');
-        return null;
-    }
-    return numericValue;
+
+    facts.forEach(fact => {
+        const div = document.createElement('div');
+        div.className = 'fact';
+        div.textContent = fact;
+        factsContainer.appendChild(div);
+    });
+}
+
+async function generateFacts() {
+    const number = getNumber(); 
+    if (!number) return; 
+
+    const facts = await fetchCatFacts(number);
+    showFacts(facts);
+
+    document.getElementById('numberInput').value = ''; 
 }
