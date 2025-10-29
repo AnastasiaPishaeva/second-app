@@ -29,10 +29,10 @@ class BookLibrary {
 
         try {
             const books = await this.getTrendingBooks();
-            this.displayBooks(books, 'Популярные книги');
+            this.displayBooks(books, 'Popular books');
         } catch (error) {
             console.error('Error loading initial books:', error);
-            this.showError('Ошибка загрузки книг. Попробуйте еще раз.');
+            this.showError('Book loading error. Please try again.');
         }
     }
 
@@ -41,7 +41,7 @@ class BookLibrary {
         const query = searchInput.value.trim();
         
         if (!query) {
-            alert('Пожалуйста, введите поисковый запрос');
+            alert('Please enter a search query.');
             return;
         }
 
@@ -52,10 +52,10 @@ class BookLibrary {
         
         try {
             const books = await this.searchBooks(query, 1);
-            this.displayBooks(books, `Результаты поиска: "${query}"`);
+            this.displayBooks(books, `Search results:: "${query}"`);
         } catch (error) {
             console.error('Error searching books:', error);
-            this.showError('Ошибка поиска. Попробуйте еще раз.');
+            this.showError('Search error. Try again.');
         }
     }
 
@@ -76,7 +76,7 @@ class BookLibrary {
             this.appendBooks(books);
         } catch (error) {
             console.error('Error loading more books:', error);
-            this.showError('Ошибка загрузки дополнительных книг.');
+            this.showError('Error loading additional books.');
         } finally {
             loading.style.display = 'none';
         }
@@ -176,8 +176,8 @@ class BookLibrary {
         const bookCard = document.createElement('div');
         bookCard.className = 'book-card';
         
-        const title = book.title || 'Неизвестная книга';
-        const author = book.author_name ? book.author_name[0] : (book.authors ? book.authors[0].name : 'Неизвестный автор');
+        const title = book.title || 'Unknown book';
+        const author = book.author_name ? book.author_name[0] : (book.authors ? book.authors[0].name : 'Unknown author');
         const year = book.first_publish_year || book.publish_date || '';
         const subjects = book.subject ? book.subject.slice(0, 3) : [];
         const description = book.description ? (typeof book.description === 'string' ? book.description : book.description.value || '') : '';
@@ -229,7 +229,7 @@ class BookLibrary {
         booksGrid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #FF6B6B;">
                 <h3>${message}</h3>
-                <p>Попробуйте выбрать другую категорию или поискать по-другому</p>
+                <p>Try selecting a different category or searching in a different way</p>
             </div>
         `;
     }
