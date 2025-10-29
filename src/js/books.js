@@ -32,9 +32,8 @@ class BookLibrary {
         try {
             const books = await this.getTrendingBooks();
             this.displayBooks(books, 'Popular books');
-        } catch (error) {
-            console.error('Error loading initial books:', error);
-            this.showError('Book loading error. Please try again.');
+        } catch (_) {
+            this.showNotFound();
         }
     }
 
@@ -43,7 +42,6 @@ class BookLibrary {
         const query = searchInput.value.trim();
         
         if (!query) {
-            alert('Please enter a search query.');
             return;
         }
 
@@ -54,10 +52,9 @@ class BookLibrary {
         
         try {
             const books = await this.searchBooks(query, 1);
-            this.displayBooks(books, `Search results:: "${query}"`);
-        } catch (error) {
-            console.error('Error searching books:', error);
-            this.showError('Search error. Try again.');
+            this.displayBooks(books, `Search results: "${query}"`);
+        } catch (_) {
+            this.showNotFound();
         }
     }
 
@@ -75,10 +72,13 @@ class BookLibrary {
                 books = await this.getTrendingBooks(this.currentPage);
             }
 
-            this.appendBooks(books);
-        } catch (error) {
-            console.error('Error loading more books:', error);
-            this.showError('Error loading additional books.');
+            if (!books || books.length === 0) {
+                this.showNotFound();
+            } else {
+                this.appendBooks(books);
+            }
+        } catch (_) {
+            this.showNotFound();
         } finally {
             loading.style.display = 'none';
         }
@@ -88,21 +88,17 @@ class BookLibrary {
         const offset = (page - 1) * this.booksPerPage;
         const url = `${this.apiBaseUrl}/search.json?q=${encodeURIComponent(query)}&limit=${this.booksPerPage}&offset=${offset}&fields=key,title,author_name,first_publish_year,subject,cover_i,isbn,number_of_pages_median,ratings_average,description`;
         
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-        if (data.docs && data.docs.length > 0) {
-            return data.docs;
-        } else {
-            throw new Error('No books found');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                return [];
+            }
+            const data = await response.json();
+            return Array.isArray(data.docs) ? data.docs : [];
+        } catch (_) {
+            return [];
         }
     }
-
 
     async getTrendingBooks(page = 1) {
         const popularTerms = ['bestseller', 'popular', 'classic', 'award'];
@@ -118,19 +114,17 @@ class BookLibrary {
     async getBookDetails(workKey) {
         const url = `${this.apiBaseUrl}${workKey}.json`;
         
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        try {
+            const response = await fetch(url);
+            if (!response.ok) return {};
+            const data = await response.json();
+            if (data.covers && data.covers.length > 0) {
+                data.cover_i = data.covers[0];
+            }
+            return data;
+        } catch (_) {
+            return {};
         }
-
-        const data = await response.json();
-        
-        if (data.covers && data.covers.length > 0) {
-            data.cover_i = data.covers[0];
-        }
-
-        return data;
     }
 
     showLoading() {
@@ -149,6 +143,11 @@ class BookLibrary {
 
         categoryTitleElement.textContent = categoryTitle;
         booksGrid.innerHTML = '';
+
+        if (!books || books.length === 0) {
+            this.showNotFound();
+            return;
+        }
 
         books.forEach(book => {
             this.addBookCard(book, booksGrid);
@@ -169,6 +168,11 @@ class BookLibrary {
     appendBooks(books) {
         const booksGrid = document.getElementById('booksGrid');
         
+        if (!books || books.length === 0) {
+            this.showNotFound();
+            return;
+        }
+
         books.forEach(book => {
             this.addBookCard(book, booksGrid);
         });
@@ -179,10 +183,10 @@ class BookLibrary {
         bookCard.className = 'book-card';
         
         const title = book.title || 'Unknown book';
-        const author = book.author_name ? book.author_name[0] : (book.authors ? book.authors[0].name : 'Unknown author');
+        const author = book.author_name ? book.author_name[0] : (book.authors && book.authors[0] ? book.authors[0].name : 'Unknown author');
         const year = book.first_publish_year || book.publish_date || '';
-        const subjects = book.subject ? book.subject.slice(0, 3) : [];
-        const description = book.description ? (typeof book.description === 'string' ? book.description : book.description.value || '') : '';
+        const subjects = Array.isArray(book.subject) ? book.subject.slice(0, 3) : [];
+        const description = book.description ? (typeof book.description === 'string' ? book.description : (book.description.value || '')) : '';
         const rating = book.ratings_average || 0;
         const pages = book.number_of_pages_median || '';
         let coverUrl = '';
@@ -216,11 +220,12 @@ class BookLibrary {
     }
 
     truncateText(text, maxLength) {
+        if (!text) return '';
         if (text.length <= maxLength) return text;
         return text.substring(0, maxLength) + '...';
     }
 
-    showError(message) {
+    showNotFound() {
         const loading = document.getElementById('loading');
         const booksGallery = document.getElementById('booksGallery');
         const booksGrid = document.getElementById('booksGrid');
@@ -229,11 +234,14 @@ class BookLibrary {
         booksGallery.style.display = 'block';
         
         booksGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #FF6B6B;">
-                <h3>${message}</h3>
-                <p>Try selecting a different category or searching in a different way</p>
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #121212;">
+                <h3>Books not found</h3>
             </div>
         `;
+    }
+
+    showError(_) {
+        this.showNotFound();
     }
 }
 

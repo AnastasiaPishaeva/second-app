@@ -1,6 +1,5 @@
-/* Book Library Styles */
 .search-section {
-  margin: 25px 0;
+  margin: 40px 0;
   text-align: center;
 }
 
@@ -181,7 +180,6 @@
   transform: none;
 }
 
-/* Responsive Design for Book Library */
 @media (max-width: 768px) {
   .search-container {
     flex-direction: column;
