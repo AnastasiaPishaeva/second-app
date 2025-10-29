@@ -109,7 +109,7 @@ p {
   text-align: left;
 }
 
-.footer {
+footer {
   background: #9C968A;
   display: flex;
   align-items: center;
@@ -137,6 +137,9 @@ p {
   main {
     padding: 0 60px;
   }
+  footer {
+    padding-left: 60px;
+  }
   nav ul {
     gap: 45px;
     padding: 0 60px;
@@ -157,6 +160,9 @@ p {
 @media (max-width: 600px) {
   main {
     padding: 0 30px;
+  }
+  footer {
+    padding-left: 30px;
   }
   nav ul {
     gap: 35px;
