@@ -40,7 +40,7 @@ async function loadMemes() {
             });
         });
     } catch (error) {
-        console.error('Ошибка при загрузке мемов:', error);
+        console.error('Error when uploading memes:', error);
     }
 }
 
@@ -49,7 +49,7 @@ function setupSearch() {
     const memesGrid = document.getElementById('memesGrid');
 
     const notFoundMessage = document.createElement('div');
-    notFoundMessage.textContent = "Ничего не найдено";
+    notFoundMessage.textContent = "Nothing was found";
     notFoundMessage.classList.add('not-found');
     memesGrid.parentNode.insertBefore(notFoundMessage, memesGrid.nextSibling);
 
@@ -90,16 +90,16 @@ async function createMeme(templateId, text0, text1) {
         if (data.success) {
             showCreatedMeme(data.data.url);
         } else {
-            alert('Ошибка при создании мема: ' + data.error_message);
+            alert('Error when creating a meme: ' + data.error_message);
         }
     } catch (error) {
-        console.error('Ошибка при создании мема:', error);
+        console.error('Error when creating a meme:', error);
     }
 }
 
 function showCreatedMeme(url) {
     const resultDiv = document.getElementById('createdMeme');
-    resultDiv.innerHTML = `<h3>Ваш мем:</h3><img src="${url}" alt="Created Meme"/>`;
+    resultDiv.innerHTML = `<h3>Your meme:</h3><img src="${url}" alt="Created Meme"/>`;
 }
 
 function setupCreateButton() {

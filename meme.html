@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,12 +20,12 @@
 </header>
 <main>
     <section>
-        <h1>Создание мемов</h1>
+        <h1 style="text-align: center; margin-top: 0; margin-bottom: 48px;" >Creating memes</h1>
         <div class="search-row">
             <div class="search-input">
-                <input type="text" id="searchInput" placeholder="Поиск..." />
+                <input type="text" id="searchInput" placeholder="Search..." />
             </div>
-            <div class="create-button">Создать</div>
+            <div class="create-button">Create</div>
         </div>
     </section>
 
@@ -36,11 +36,11 @@
     <div id="memeModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h3>Введите текст для мема</h3>
+            <h3>Enter the text for the meme</h3>
             <form id="memeForm">
-                <input type="text" id="text0" placeholder="Верхний текст" required />
-                <input type="text" id="text1" placeholder="Нижний текст" required />
-                <button type="submit">Создать мем</button>
+                <input type="text" id="text0" placeholder="Top text" required />
+                <input type="text" id="text1" placeholder="Bottom text" required />
+                <button type="submit">Create a meme</button>
             </form>
             <div id="createdMeme"></div>
         </div>
