@@ -1,3 +1,5 @@
+import '../css/books.css';
+import '../css/style.css';
 class BookLibrary {
     constructor() {
         this.apiBaseUrl = 'https://openlibrary.org';

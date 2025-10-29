@@ -1,3 +1,5 @@
+import '../css/meme.css';
+import '../css/style.css';
 const IMGFLIP_USERNAME = 'irako5';
 const IMGFLIP_PASSWORD = '4Xh-CudVw&u%.T4';
 

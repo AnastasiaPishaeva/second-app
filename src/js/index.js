@@ -1,4 +1,5 @@
-// Ждем загрузки DOM
+import '../css/style.css';
+import '../css/index.css';
 document.addEventListener('DOMContentLoaded', function() {
 const numberInput = document.getElementById('numberInput');
 const submitButton = document.getElementById('submitButton');
