@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+  <script type="module" crossorigin src="./assets/third-CiLOxIhH.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/style-CwViLTPP.js">
+  <link rel="stylesheet" crossorigin href="./assets/style-wgu-MAEH.css">
+  <link rel="stylesheet" crossorigin href="./assets/third-CwJ_zrck.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">MeowFacts</a></li>
+            <li><a href="meme.html">Memes</a></li>
+            <li><a href="book.html" class="active">Books</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 style="text-align: center; margin-top: 0; margin-bottom: 0;">Your library</h1>
+    
+    <div class="search-section">
+        <div class="search-container">
+            <input style="font-family: inherit;" type="text" id="searchInput" placeholder="Search for books, authors, and genres...">
+        </div>
+    </div>
+
+    <div class="books-display">
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Uploading books...</p>
+        </div>
+        
+        <div class="books-gallery" id="booksGallery" style="display: none;">
+            <h3 id="categoryTitle"></h3>
+            <div class="books-grid" id="booksGrid">
+            </div>
+            <button class="load-more-btn" id="loadMoreBtn">Upload more</button>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2025 Website. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

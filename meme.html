@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memes</title>
+  <script type="module" crossorigin src="./assets/second-aoSBszU4.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/style-CwViLTPP.js">
+  <link rel="stylesheet" crossorigin href="./assets/style-wgu-MAEH.css">
+  <link rel="stylesheet" crossorigin href="./assets/second-lremZ5vF.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">MeowFacts</a></li>
+            <li><a href="meme.html" class="active">Memes</a></li>
+            <li><a href="book.html">Books</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <h1 style="text-align: center; margin-top: 0; margin-bottom: 48px;" >Creating memes</h1>
+        <div class="search-row">
+            <div class="search-input">
+                <input type="text" id="searchInput" placeholder="Search..." />
+            </div>
+            <div class="create-button">Create</div>
+        </div>
+    </section>
+
+    <section class="memes-section">
+        <div class="memes-grid" id="memesGrid"></div>
+    </section>
+
+    <div id="memeModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Enter the text for the meme</h3>
+            <form id="memeForm">
+                <input type="text" id="text0" placeholder="Top text" required />
+                <input type="text" id="text1" placeholder="Bottom text" required />
+                <button type="submit">Create a meme</button>
+            </form>
+            <div id="createdMeme"></div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2025 Website. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
