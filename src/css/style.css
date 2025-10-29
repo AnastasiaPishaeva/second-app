@@ -110,13 +110,14 @@ p {
 }
 
 .footer {
-  height: 130px;
   background: #9C968A;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 150px;
   padding-left: 120px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-top: 10px;
 }
 
 .footer-content {
